@@ -1,0 +1,44 @@
+GET http://localhost:3000/
+
+###
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+    "userName":"kullanıcı",
+    "title":"deneme12345",
+    "message":"deneme12345"
+}
+
+###
+GET http://localhost:3000/posts
+
+
+
+###
+
+GET http://localhost:3000/posts/610a9060ebe9f05278e86122
+
+###
+
+PUT http://localhost:3000/posts/123
+
+###
+
+DELETE http://localhost:3000/posts/610bea5a47131e3514b8ae8a
+Content-Type: application/json
+
+###
+
+PUT  http://localhost:3000/posts/610d0fd59e86fe4a20082a0a
+Content-Type: application/json
+
+{
+    "userName":"deneme2",
+    "title":"deneme2",
+    "message":"deneme2"
+    
+}
+
+
+
