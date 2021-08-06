@@ -9,7 +9,7 @@ router.get('/',async(req,res)=>{
 
     res.json(allPosts)} 
     catch(err){
-        console.log(err);
+        res.status(404).send(`<h1>Oops..Error while listing posts</h1>`)
     }
 
  });
@@ -20,10 +20,10 @@ router.get('/',async(req,res)=>{
             res.json(rqPost)
         }
         else{
-            res.status(404).json({message:"Kullanıcı bulunamadı.."})
+            res.status(404).send(`<h1>An error occured.. It may have been deleted.</h1>`)
         }
     }catch(err){
-        console.log(err);
+        res.status(404).send(`<h1>An error occured.. It may have been deleted.</h1>`)
     }
    });
    
@@ -34,7 +34,7 @@ router.get('/',async(req,res)=>{
            res.json(result)
 
        }catch(err){
-           console.log("eklenme sırasında hata oluştu.."+err);
+        res.status(404).send(`<h1>An error occured..Please try again.</h1>`)
        }
       
    });
@@ -42,12 +42,12 @@ router.get('/',async(req,res)=>{
    router.delete('/:id',async(req,res)=>{
        try{const deleted=await Post.findByIdAndDelete({_id:req.params.id})
            if(deleted){
-               return res.json({"message":"basariyla silindi"})
+               return res.json(deleted)
            }else{
-               res.status(404).json({"message":"Kullanıcı bulunamadı"})
+               res.status(404).send(`<h1>Error deleting post.. it may have been deleted before.</h1>`)
            }}
            catch(err){
-               console.log("hata cıktı"+err);
+            res.status(404).send(`<h1>An error occured..Please try again.</h1>`);
            }
            
        });
@@ -70,17 +70,14 @@ router.get('/',async(req,res)=>{
 //             console.log(err);
 //         }
 //     })
+
 router.put('/:id',async(req,res)=>{
-    const {id}=req.params
-    try{
-        const response=await Post.findByIdAndUpdate(id,req.body)
-        if(!response) throw Error('Error occured')
-        const updated={ ...response._doc, ...req.body}
-        res.status(200).json(updated)
-    }
-    catch(err){
-        res.status(500).json({message:error.message})
-    }
+    
+        const{id}=req.params
+        const{userName,title,message}=req.body
+        const updated={userName,title,message,_id:id}
+        await Post.findByIdAndUpdate(id,updated,{new:true})
+    
 })
 
    module.exports=router;

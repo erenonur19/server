@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-PUT  http://localhost:3000/posts/610d0fd59e86fe4a20082a0a
+PUT  http://localhost:3000/posts/610d47305ab4583110922c8d
 Content-Type: application/json
 
 {
