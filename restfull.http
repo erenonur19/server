@@ -17,7 +17,7 @@ GET http://localhost:3000/posts
 
 ###
 
-GET http://localhost:3000/posts/610a9060ebe9f05278e86122
+GET http://localhost:3000/posts/611100daf471052018ede970
 
 ###
 
@@ -25,7 +25,7 @@ PUT http://localhost:3000/posts/123
 
 ###
 
-DELETE http://localhost:3000/posts/610bea5a47131e3514b8ae8a
+DELETE http://localhost:3000/posts/611133f946f39963b8779639
 Content-Type: application/json
 
 ###
@@ -40,5 +40,26 @@ Content-Type: application/json
     
 }
 
+###
+POST http://localhost:3000/posts/comments
+Content-Type: application/json
+
+{
+    "userName":"selam",
+    "title":"selam",
+    "message":"selam"
+}
+
+###
+GET http://localhost:3000/posts/comments
 
 
+
+###
+
+
+DELETE http://localhost:3000/posts/comments/611135dcad80c448188d74ba
+Content-Type: application/json
+
+###
+GET http://localhost:3000/posts/comments/yorumlar

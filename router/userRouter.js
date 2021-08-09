@@ -2,7 +2,53 @@ const { json } = require('express');
 const express=require('express');
 const router=express.Router();
 const Post=require('../models/postModel')
+const Comment=require('../models/commentModel')
 
+
+router.get('/comments',async(req,res)=>{
+    try{const allComments=await Comment.find({})
+
+    res.json(allComments)} 
+    catch(err){
+        res.status(404).send(`<h1>Oops..Error while listing comments</h1>`)
+    }
+ });
+
+
+router.post('/comments',async(req,res)=>{
+    try{ 
+        const newComment=new Comment(req.body);
+        const result=await newComment.save();
+        res.json(result)
+
+    }catch(err){
+     res.status(404).send(`<h1>An error occured..Please try again.</h1>`)
+    }
+ });
+ router.delete('/comments/:id',async(req,res)=>{
+    try{const deletedComment=await Comment.findByIdAndDelete({_id:req.params.id})
+        if(deletedComment){
+            return res.json(deletedComment)
+        }else{
+            res.status(404).send(`<h1>Error deleting post.. it may have been deleted before.</h1>`)
+        }}
+        catch(err){
+         res.status(404).send(`<h1>An error occured..Please try again.</h1>`);
+        }
+        
+    });
+    router.delete('/:id',async(req,res)=>{
+        try{const deleted=await Post.findByIdAndDelete({_id:req.params.id})
+            if(deleted){
+                return res.json(deleted)
+            }else{
+                res.status(404).send(`<h1>Error deleting post.. it may have been deleted before.</h1>`)
+            }}
+            catch(err){
+             res.status(404).send(`<h1>An error occured..Please try again.</h1>`);
+            }
+            
+        });
 
 router.get('/',async(req,res)=>{
     try{const allPosts=await Post.find({})
@@ -39,18 +85,7 @@ router.get('/',async(req,res)=>{
       
    });
 
-   router.delete('/:id',async(req,res)=>{
-       try{const deleted=await Post.findByIdAndDelete({_id:req.params.id})
-           if(deleted){
-               return res.json(deleted)
-           }else{
-               res.status(404).send(`<h1>Error deleting post.. it may have been deleted before.</h1>`)
-           }}
-           catch(err){
-            res.status(404).send(`<h1>An error occured..Please try again.</h1>`);
-           }
-           
-       });
+   
    
 
 //    router.patch('/:id',async(req,res)=>{
@@ -79,5 +114,23 @@ router.put('/:id',async(req,res)=>{
         await Post.findByIdAndUpdate(id,updated,{new:true})
     
 })
+router.get("/comments/yorumlar", (req,res) => {
+    Post.aggregate([
+        {
+            $lookup: {
+                from: "Comments",
+                localField: "title",
+                foreignField: "title",
+                as: "yorumlar"
+            }
+        }
+    ], (error, data) => {
+        if (!error)
+            res.json(data);
+        else
+            res.send("Beklenmeyen bir hata ile karşılaşıldı.", error.message);
+    });
+});
+module.exports = router;
 
    module.exports=router;

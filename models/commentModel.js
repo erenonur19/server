@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
-const postSchema=new Schema({
+const commentSchema=new Schema({
    userName:{
        type:String,
        required:true,
@@ -10,12 +10,11 @@ const postSchema=new Schema({
        maxlength:15
    },
    title:{
-       type:String,
-       required:true,
-       minlength:3,
-       maxlength:30,
-       unique:true
-   },
+    type:String,
+    required:true,
+    minlength:3,
+    maxlength:30,
+},
    message:{
     type:String,
     required:true,
@@ -23,6 +22,6 @@ const postSchema=new Schema({
     maxlength:900
 },
 
-},{collection:'Posts',timestamps:true});
-const Post=mongoose.model('Post',postSchema);
-module.exports=Post;
+},{collection:'Comments',timestamps:true});
+const Comment=mongoose.model('Comment',commentSchema);
+module.exports=Comment;
