@@ -14,7 +14,8 @@ const postSchema=new Schema({
        required:true,
        minlength:3,
        maxlength:30,
-       unique:true
+       unique:true,
+       ref:'Comment'
    },
    message:{
     type:String,
@@ -24,5 +25,6 @@ const postSchema=new Schema({
 },
 
 },{collection:'Posts',timestamps:true});
+
 const Post=mongoose.model('Post',postSchema);
 module.exports=Post;

@@ -4,8 +4,9 @@ const express=require('express');
 const userRouter=require('./router/userRouter');
 
 const app = express();
-var cors = require('cors')
-
+var cors = require('cors');
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
 app.use(cors())
 // app.all('*', function (req, res, next) {
 //     if (!req.get('Origin')) return next();

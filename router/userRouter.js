@@ -5,14 +5,22 @@ const Post=require('../models/postModel')
 const Comment=require('../models/commentModel')
 
 
-router.get('/comments',async(req,res)=>{
-    try{const allComments=await Comment.find({})
+// router.get('/comments',async(req,res)=>{
+//     try{const allComments=await Comment.find({})
 
-    res.json(allComments)} 
-    catch(err){
-        res.status(404).send(`<h1>Oops..Error while listing comments</h1>`)
-    }
- });
+//     res.json(allComments)} 
+//     catch(err){
+//         res.status(404).send(`<h1>Oops..Error while listing comments</h1>`)
+//     }
+//  });
+
+router.get("/:id/comments", async(req,res) => {
+       let PostName=await Post.findById({_id:req.params.id})
+       const title1=await PostName.title;
+       const messages= await Comment.find({title:title1});
+       res.json(messages)
+       
+      });
 
 
 router.post('/comments',async(req,res)=>{
@@ -114,23 +122,5 @@ router.put('/:id',async(req,res)=>{
         await Post.findByIdAndUpdate(id,updated,{new:true})
     
 })
-router.get("/comments/yorumlar", (req,res) => {
-    Post.aggregate([
-        {
-            $lookup: {
-                from: "Comments",
-                localField: "title",
-                foreignField: "title",
-                as: "yorumlar"
-            }
-        }
-    ], (error, data) => {
-        if (!error)
-            res.json(data);
-        else
-            res.send("Beklenmeyen bir hata ile karşılaşıldı.", error.message);
-    });
-});
-module.exports = router;
 
-   module.exports=router;
+module.exports = router;

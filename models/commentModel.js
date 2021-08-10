@@ -14,6 +14,7 @@ const commentSchema=new Schema({
     required:true,
     minlength:3,
     maxlength:30,
+    ref:'Post',
 },
    message:{
     type:String,

@@ -45,9 +45,9 @@ POST http://localhost:3000/posts/comments
 Content-Type: application/json
 
 {
-    "userName":"selam",
-    "title":"selam",
-    "message":"selam"
+    "userName":"selammm",
+    "title":"baslik",
+    "message":"selammm"
 }
 
 ###
@@ -62,4 +62,4 @@ DELETE http://localhost:3000/posts/comments/611135dcad80c448188d74ba
 Content-Type: application/json
 
 ###
-GET http://localhost:3000/posts/comments/yorumlar
+GET http://localhost:3000/posts/61113e9d70f35b5c24be36a7/comments
