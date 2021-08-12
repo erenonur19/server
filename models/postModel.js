@@ -5,7 +5,6 @@ const postSchema=new Schema({
        type:String,
        required:true,
        trim:true,
-       lowercase:true,
        minlength:3,
        maxlength:15
    },

@@ -2,6 +2,7 @@ require('./db/dbConnection')
 const express=require('express');
 
 const userRouter=require('./router/userRouter');
+const loginRouter=require('./router/loginRouter')
 
 const app = express();
 var cors = require('cors');
@@ -20,6 +21,7 @@ app.use(express.urlencoded({extended:true}));
 
 
 app.use('/posts',userRouter);
+app.use('/auth',loginRouter);
 
 
 

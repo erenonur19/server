@@ -63,3 +63,27 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/posts/61113e9d70f35b5c24be36a7/comments
+
+###
+GET http://localhost:3000/auth
+
+###
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{    
+    "name":"onur",
+    "userName":"onur19",
+    "email":"onur19@email.com",
+    "password":"19onur"
+}
+
+###
+POST http://localhost:3000/posts/61151a44b76f6c64448407ad/comments
+Content-Type: application/json
+
+{    
+    
+    "userName":"selammm",
+    "message":"selam"
+}

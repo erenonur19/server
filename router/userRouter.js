@@ -1,4 +1,3 @@
-const { json } = require('express');
 const express=require('express');
 const router=express.Router();
 const Post=require('../models/postModel')
@@ -23,9 +22,16 @@ router.get("/:id/comments", async(req,res) => {
       });
 
 
-router.post('/comments',async(req,res)=>{
+router.post('/:id/comments',async(req,res)=>{
     try{ 
-        const newComment=new Comment(req.body);
+    let PostName=await Post.findById({_id:req.params.id})
+       const title1=await PostName.title;
+        const newComment=new Comment({
+            userName:req.body.userName,
+            message:req.body.message,
+            title:title1,
+            
+        });
         const result=await newComment.save();
         res.json(result)
 
@@ -46,14 +52,17 @@ router.post('/comments',async(req,res)=>{
         
     });
     router.delete('/:id',async(req,res)=>{
-        try{const deleted=await Post.findByIdAndDelete({_id:req.params.id})
-            if(deleted){
-                return res.json(deleted)
+        try{
+            const deletedPost=await Post.findByIdAndDelete({_id:req.params.id})
+            await Comment.deleteMany({title:deletedPost.title})
+
+            if(deletedPost){
+                return res.json({message:"Deleted Succesfulyy"})
             }else{
-                res.status(404).send(`<h1>Error deleting post.. it may have been deleted before.</h1>`)
+                res.send(`<h1>Error deleting post.. it may have been deleted before.</h1>`)
             }}
             catch(err){
-             res.status(404).send(`<h1>An error occured..Please try again.</h1>`);
+              console.log(err);
             }
             
         });
