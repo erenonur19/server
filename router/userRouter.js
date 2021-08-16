@@ -2,16 +2,25 @@ const express=require('express');
 const router=express.Router();
 const Post=require('../models/postModel')
 const Comment=require('../models/commentModel')
+const User=require('../models/userModel')
+const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 
 
-// router.get('/comments',async(req,res)=>{
-//     try{const allComments=await Comment.find({})
 
-//     res.json(allComments)} 
-//     catch(err){
-//         res.status(404).send(`<h1>Oops..Error while listing comments</h1>`)
-//     }
-//  });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.get("/:id/comments", async(req,res) => {
        let PostName=await Post.findById({_id:req.params.id})
@@ -91,14 +100,35 @@ router.get('/',async(req,res)=>{
    });
    
    router.post('/',async(req,res)=>{
-       try{ 
-           const newPost=new Post(req.body);
-           const result=await newPost.save();
-           res.json(result)
+       var idd;
+       let token=req.headers.token;
+      
+           jwt.verify(token,'mostsecretkey',async(err,decoded)=>{
+               if(err){ 
+            //        return res.status(404).json({
+            //        mesaj:'Unauthorized'
+            //    })
+            console.log(err);
+        }
+               idd=decoded.user_id;
+               console.log(idd);
+        })
+               await User.findOne({_id:idd}),async(err,user1)=>{
+                const newPost=new Post({
+                    userName:user1.userName,
+                    message:req.body.message,
+                    title:req.body.title,
+        
+                       });
+                   const result=await newPost.save();
+                   res.json(result)
 
-       }catch(err){
-        res.status(404).send(`<h1>An error occured..Please try again.</h1>`)
-       }
+               } 
+           
+           
+           
+
+      
       
    });
 
