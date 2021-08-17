@@ -5,22 +5,7 @@ const Comment=require('../models/commentModel')
 const User=require('../models/userModel')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const verify=require('./verifyToken')
 
 router.get("/:id/comments", async(req,res) => {
        let PostName=await Post.findById({_id:req.params.id})
@@ -76,10 +61,13 @@ router.post('/:id/comments',async(req,res)=>{
             
         });
 
-router.get('/',async(req,res)=>{
+router.get('/',verify,async(req,res,next)=>{
+    // res.send(req.user._id)
     try{const allPosts=await Post.find({})
 
-    res.json(allPosts)} 
+    res.json(allPosts)
+    next()
+} 
     catch(err){
         res.status(404).send(`<h1>Oops..Error while listing posts</h1>`)
     }
@@ -99,36 +87,27 @@ router.get('/',async(req,res)=>{
     }
    });
    
-   router.post('/',async(req,res)=>{
-       var idd;
-       let token=req.headers.token;
-      
-           jwt.verify(token,'mostsecretkey',async(err,decoded)=>{
-               if(err){ 
-            //        return res.status(404).json({
-            //        mesaj:'Unauthorized'
-            //    })
+   router.post('/',verify,async(req,res)=>{
+    
+          try{
+             
+            const user1=await User.findById({_id:req.user._id})
+            const username1=await user1.userName;
+             const newPost=new Post({
+                 userName:username1,
+                 title:req.body.title,
+                 message:req.body.message,
+                 
+     
+                    });
+                const result=await newPost.save();
+                res.json(result)
+
+           
+        }
+        catch(err){
             console.log(err);
         }
-               idd=decoded.user_id;
-               console.log(idd);
-        })
-               await User.findOne({_id:idd}),async(err,user1)=>{
-                const newPost=new Post({
-                    userName:user1.userName,
-                    message:req.body.message,
-                    title:req.body.title,
-        
-                       });
-                   const result=await newPost.save();
-                   res.json(result)
-
-               } 
-           
-           
-           
-
-      
       
    });
 

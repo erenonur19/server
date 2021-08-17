@@ -1,21 +1,24 @@
 require('./db/dbConnection')
 const express=require('express');
+const dotenv=require('dotenv')
 
 const userRouter=require('./router/userRouter');
 const loginRouter=require('./router/loginRouter')
+dotenv.config();
 
 const app = express();
 var cors = require('cors');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(cors())
-// app.all('*', function (req, res, next) {
-//     if (!req.get('Origin')) return next();
-//     res.set('Access-Control-Allow-Origin', '*');
-//     res.set('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT');
-//     res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
-//     next();
-// });
+app.all('*', function (req, res, next) {
+    if (!req.get('Origin')) return next();
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET,POST');
+    res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
+    res.header('Access-Control-Expose-Headers', 'token')
+    next();
+});
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 

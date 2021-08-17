@@ -3,16 +3,18 @@ GET http://localhost:3000/
 ###
 POST http://localhost:3000/posts
 Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFhMjA0ODllZDA4ZDIzNjgzMDc0OGUiLCJpYXQiOjE2MjkyMDkxOTF9.UHZEGW4mKqLXlg_dT8JBQPiJaPC6zWYJryCcd2VsJHA
 
 {
-    "userName":"kullanıcı",
+    
     "title":"deneme12345",
     "message":"deneme12345"
 }
 
 ###
 GET http://localhost:3000/posts
-
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFhMjA0ODllZDA4ZDIzNjgzMDc0OGUiLCJpYXQiOjE2MjkyMDkxOTF9.UHZEGW4mKqLXlg_dT8JBQPiJaPC6zWYJryCcd2VsJHA
 
 
 ###
@@ -76,6 +78,18 @@ Content-Type: application/json
     "userName":"on2222",
     "email":"onr1992222@email.com",
     "password":"19onuasd"
+}
+
+###
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{    
+    
+    "username":"onur12345",
+    "password":"onur12345",
+    
 }
 
 ###
