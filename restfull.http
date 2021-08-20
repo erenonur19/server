@@ -93,11 +93,20 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/posts/61151a44b76f6c64448407ad/comments
+POST http://localhost:3000/posts/611cd6520c636d3368e30f0c/comments
 Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFiOWQ1NTEwZTQ2MDA1ODgxMjdmZjkiLCJpYXQiOjE2MjkyNzA3MzR9.lXc9ApF5RhCS2i1HKAvEGvFIDxv51sACAY6lvu3eVro
 
 {    
-    
-    "userName":"selammm",
     "message":"selam"
 }
+
+###
+POST  http://localhost:3000/auth/username
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFiOWQ1NTEwZTQ2MDA1ODgxMjdmZjkiLCJpYXQiOjE2MjkyNzA3MzR9.lXc9ApF5RhCS2i1HKAvEGvFIDxv51sACAY6lvu3eVro
+
+###
+
+GET http://localhost:3000/profile
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFlMTkwM2JkYzhjMjJmMjhhZGM5ZDIiLCJpYXQiOjE2MjkzNjgzNDV9.FDaPGyiTpysWS9t_q_Ng9yCsDZ66MVwjZeFUknqw6Ec

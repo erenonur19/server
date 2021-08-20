@@ -7,7 +7,7 @@ const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 const verify=require('./verifyToken')
 
-router.get("/:id/comments", async(req,res) => {
+router.get("/:id/comments",async(req,res) => {
        let PostName=await Post.findById({_id:req.params.id})
        const title1=await PostName.title;
        const messages= await Comment.find({title:title1});
@@ -16,12 +16,14 @@ router.get("/:id/comments", async(req,res) => {
       });
 
 
-router.post('/:id/comments',async(req,res)=>{
-    try{ 
+router.post('/:id/comments',verify,async(req,res)=>{
+    try{
+    let user1=await User.findById({_id:req.user._id})     
     let PostName=await Post.findById({_id:req.params.id})
-       const title1=await PostName.title;
+    const title1=await PostName.title;
+    let username1=await user1.userName;
         const newComment=new Comment({
-            userName:req.body.userName,
+            userName:username1,
             message:req.body.message,
             title:title1,
             

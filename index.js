@@ -4,6 +4,7 @@ const dotenv=require('dotenv')
 
 const userRouter=require('./router/userRouter');
 const loginRouter=require('./router/loginRouter')
+const profileRouter=require('./router/profileRouter')
 dotenv.config();
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(express.urlencoded({extended:true}));
 
 app.use('/posts',userRouter);
 app.use('/auth',loginRouter);
+app.use('/profile',profileRouter);
 
 
 

@@ -3,6 +3,7 @@ const router2=express.Router();
 const User=require('../models/userModel')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+const verify=require('./verifyToken')
 
 
 
@@ -58,6 +59,15 @@ router2.post('/login', async(req,res)=>{
         })
 
     })
+
+})
+
+router2.get('/username',verify,async(req,res,next)=>{
+    let user=await User.findById({_id:req.user._id})
+   
+    res.send(user)
+
+
 
 })
 

@@ -6,7 +6,8 @@ const postSchema=new Schema({
        required:true,
        trim:true,
        minlength:3,
-       maxlength:15
+       maxlength:15,
+       writable: true
    },
    title:{
        type:String,
@@ -14,13 +15,15 @@ const postSchema=new Schema({
        minlength:3,
        maxlength:30,
        unique:true,
-       ref:'Comment'
+       ref:'Comment',
+       writable: true
    },
    message:{
     type:String,
     required:true,
     minlength:3,
-    maxlength:900
+    maxlength:900,
+    writable: true
 },
 
 },{collection:'Posts',timestamps:true});
