@@ -110,3 +110,9 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFiOWQ1NTEwZTQ2MDA1ODgxM
 GET http://localhost:3000/profile
 Content-Type: application/json
 token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFlMTkwM2JkYzhjMjJmMjhhZGM5ZDIiLCJpYXQiOjE2MjkzNjgzNDV9.FDaPGyiTpysWS9t_q_Ng9yCsDZ66MVwjZeFUknqw6Ec
+
+###
+
+GET http://localhost:3000/profile/posts
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFlMTkwM2JkYzhjMjJmMjhhZGM5ZDIiLCJpYXQiOjE2MjkzNjgzNDV9.FDaPGyiTpysWS9t_q_Ng9yCsDZ66MVwjZeFUknqw6Ec
