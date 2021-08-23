@@ -19,7 +19,7 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFhMjA0ODllZDA4ZDIzNjgzM
 
 ###
 
-GET http://localhost:3000/posts/611100daf471052018ede970
+GET http://localhost:3000/posts/612384e43cc9234dbcaa2d5f
 
 ###
 
@@ -32,12 +32,13 @@ Content-Type: application/json
 
 ###
 
-PUT  http://localhost:3000/posts/610d47305ab4583110922c8d
+PUT  http://localhost:3000/posts/611d0282c07d9a01acf4f686
 Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFlMTkwM2JkYzhjMjJmMjhhZGM5ZDIiLCJpYXQiOjE2Mjk3MTc1MTV9.A3QTknkR-hoexWPg92YR0JlM0Zba89Nwq1bvpWmZkFw
 
 {
-    "userName":"deneme2",
-    "title":"deneme2",
+    
+    "title":"deneme2asdaasdad",
     "message":"deneme2"
     
 }

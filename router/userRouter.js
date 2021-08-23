@@ -79,13 +79,13 @@ router.get('/',verify,async(req,res,next)=>{
     try{
         const rqPost= await Post.findById({_id:req.params.id})
         if (rqPost){
-            res.json(rqPost)
+            res.send(rqPost)
         }
         else{
             res.status(404).send(`<h1>An error occured.. It may have been deleted.</h1>`)
         }
     }catch(err){
-        res.status(404).send(`<h1>An error occured.. It may have been deleted.</h1>`)
+        // res.status(404).send(`<h1>An error occured.. It may have been deleted.</h1>`)
     }
    });
    
@@ -134,12 +134,23 @@ router.get('/',verify,async(req,res,next)=>{
 //         }
 //     })
 
-router.put('/:id',async(req,res)=>{
-    
+router.put('/:id',verify,async(req,res)=>{
+    try{
+        const user5=await User.findById({_id:req.user._id})
         const{id}=req.params
-        const{userName,title,message}=req.body
+        const username1=user5.userName;
+        const{userName,title,message}={
+            userName:username1,
+            title:req.body.title,
+            message:req.body.message
+        }
         const updated={userName,title,message,_id:id}
         await Post.findByIdAndUpdate(id,updated,{new:true})
+        res.json(updated);
+    }
+    catch(err){
+        console.log(err);
+    }
     
 })
 
